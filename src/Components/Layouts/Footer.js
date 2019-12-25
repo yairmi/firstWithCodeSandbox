@@ -1,10 +1,15 @@
 import React from "react";
-import { Paper, Tabs } from "material-ui";
-import { Tab } from "material-ui/Tabs";
+import { Tabs } from "@material-ui/core/Tabs";
+import { Paper } from "@material-ui/core/Paper";
+import { Tab } from "@material-ui/core/Tab";
 
 export default ({ muscles, category, onSelect }) => {
+  //Since value expect an index we need to find the index of the current selected
+  //category in muscles
   const index = category
-    ? muscles.findIndex(group => group === category) + 1
+    ? muscles.findIndex(group => {
+        return group === category;
+      }) + 1
     : 0;
 
   const onIndexSelected = (e, index) => {
@@ -22,7 +27,7 @@ export default ({ muscles, category, onSelect }) => {
       >
         <Tab label="All" />
         {muscles.map(group => (
-          <Tab label={group} />
+          <Tab key={group} label={group} />
         ))}
       </Tabs>
     </Paper>

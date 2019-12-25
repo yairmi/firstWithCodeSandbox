@@ -1,8 +1,14 @@
 //Buisiness logic of the application
 
 import React, { Fragment } from "react";
-import { Grid, Paper, Typography, List } from "material-ui";
-import { ListItem, ListItemText } from "material-ui/List";
+import { Grid, Paper, Typography, List } from "@material-ui/core";
+import {
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction
+} from "@material-ui/core/List";
+import IconButton from "@material-ui/core/IconButton";
+import { Delete } from "@material-ui/icons";
 const styles = {
   Paper: {
     padding: 20,
@@ -13,13 +19,22 @@ const styles = {
   }
 };
 
-export default ({ exercises, category }) => (
+export default ({
+  exercises,
+  category,
+  onSelect,
+  exercise: {
+    id,
+    title = "Welcome!",
+    description = "Please select an exercise from the list on the left."
+  }
+}) => (
   <Grid container>
     <Grid item sm>
       <Paper style={styles.Paper}>
         {exercises.map(([group, exercises]) =>
           !category || category === group ? (
-            <Fragment>
+            <Fragment key={group}>
               <Typography
                 variant="headline"
                 style={{ textTransform: "capitalize" }}
@@ -27,9 +42,14 @@ export default ({ exercises, category }) => (
                 {group}
               </Typography>
               <List component="ul">
-                {exercises.map(({ title }) => (
-                  <ListItem button>
-                    <ListItemText primary={title} onClick={() => onSelect()} />
+                {exercises.map(({ id, title }) => (
+                  <ListItem key={id} button onClick={() => onSelect(id)}>
+                    <ListItemText primary={title} />
+                    <ListItemSecondaryAction>
+                      <IconButton>
+                        <Delete />
+                      </IconButton>
+                    </ListItemSecondaryAction>
                   </ListItem>
                 ))}
               </List>
@@ -40,9 +60,9 @@ export default ({ exercises, category }) => (
     </Grid>
     <Grid item sm>
       <Paper style={styles.Paper}>
-        <Typography variant="display1">Welcome!</Typography>
+        <Typography variant="display1">{title}</Typography>
         <Typography variant="subheading" style={{ marginTop: 20 }}>
-          Please select an exercise from the list on the left.
+          {description}
         </Typography>
       </Paper>
     </Grid>
