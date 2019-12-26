@@ -1,5 +1,7 @@
-import React, { Component, Fragment, useState } from "react";
-import { Dialog, Button, TextField, Select } from "@material-ui/core";
+import React, { Fragment, useState } from "react";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import { Dialog, Select } from "@material-ui/core";
 import {
   DialogActions,
   DialogContent,
@@ -16,14 +18,14 @@ const useStyles = makeStyles(theme => ({
   FormControl: { width: 500 }
 }));
 
-export default function Create(props) {
+export default ({ muscles, onExerciseCreated }) => {
   const [open, setOpen] = useState(false); //Hooks
   const [exercise, setExercise] = useState({
     title: "",
     description: "",
     muscles: ""
   });
-  const [muscles, setMuscles] = useState(props);
+
   const classes = useStyles();
 
   const handleToggle = () => {
@@ -45,7 +47,7 @@ export default function Create(props) {
     //this.props.onCreate({
     //  ...exercise,
     //  id: exercise.title.toLocaleLowerCase().replace(/ /g, "-")});
-    props.onCreate({
+    onExerciseCreated({
       ...exercise,
       id: exercise.title.toLocaleLowerCase().replace(/ /g, "-")
     });
@@ -56,7 +58,6 @@ export default function Create(props) {
     //});
     setOpen(false);
     setExercise({ title: "", description: "", muscles: "" });
-    setMuscles({});
   };
 
   return (
@@ -86,9 +87,9 @@ export default function Create(props) {
             <FormControl className={classes.FormControl}>
               <InputLabel id="muscles">Muscles</InputLabel>
               <Select value={muscles} onChange={handleChange("muscles")}>
-                {categories.map(category => (
-                  <MenuItem key={category} value={category}>
-                    {category}
+                {muscles.map(muscle => (
+                  <MenuItem key={muscle} value={muscle}>
+                    {muscle}
                   </MenuItem>
                 ))}
               </Select>
@@ -113,4 +114,4 @@ export default function Create(props) {
       </Dialog>
     </Fragment>
   );
-}
+};

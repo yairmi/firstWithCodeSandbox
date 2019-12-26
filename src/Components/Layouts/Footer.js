@@ -3,7 +3,8 @@ import { Tabs } from "@material-ui/core/Tabs";
 import { Paper } from "@material-ui/core/Paper";
 import { Tab } from "@material-ui/core/Tab";
 
-export default ({ muscles, category, onSelect }) => {
+export default ({ muscles, 
+  category, onSelect }) => {
   //Since value expect an index we need to find the index of the current selected
   //category in muscles
   const index = category

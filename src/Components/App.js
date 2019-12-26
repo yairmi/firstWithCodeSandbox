@@ -1,17 +1,16 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { Header, Footer } from "./Layouts";
 import Exercises from "./Exercises";
 import { muscles, exercises } from "../store";
 
-export default class extends Component {
-  state = {
-    exercises,
-    exercise: {}
-  };
+export default () => {
+  const [stateExercises, setExercises] = useState(exercises);
+  const [exercise, setExercise] = useState({});
+  const [category, setCategory] = useState("");
   //Lesson 3 6:11
-  getExercisesByMuscles() {
+  const getExercisesByMuscles = () => {
     return Object.entries(
-      this.state.exercises.reduce((exercises, exercise) => {
+      exercises.reduce((exercises, exercise) => {
         //first is acc, second is current value
         const { muscles } = exercise; //Get the muscles from the exercise
         exercises[muscles] = exercises[muscles]
@@ -20,44 +19,37 @@ export default class extends Component {
         return exercises;
       }, {})
     );
-  }
+  };
   //category is the current selected category
-  handleCategorySelected = category => {
-    this.setState({ category });
+  const handleCategorySelected = category => {
+    setCategory({ category });
   };
 
-  handleExerciseSelected = id => {
-    this.setState(({ exercises }) => ({
-      exercise: exercises.find(ex => ex.id === id)
-    }));
+  const handleExerciseSelected = id => {
+    setExercise(exercises.find(ex => ex.id === id));
   };
   //the parameter inside setstate is the exercises from the old state and we return a new object
   //that represent the new state
-  handleExerciseCreated = exercise => {
-    this.setState(({ exercises }) => ({ exercises: [...exercises, exercise] }));
+  const handleExerciseCreated = exercise => {
+    setExercises({ stateExercises: [...stateExercises, exercise] });
   };
 
-  render() {
-    const exercises = this.getExercisesByMuscles(),
-      { category, exercise } = this.state;
-    return (
-      <Fragment>
-        <Header
-          muscles={muscles}
-          onExerciseCreated={this.handleExerciseCreated}
-        />
-        <Exercises
-          exercises={exercises}
-          category={category}
-          onSelect={this.handleExerciseSelected}
-          exercise={exercise}
-        />
-        <Footer
-          category={category}
-          muscles={muscles}
-          onSelect={this.handleCategorySelected}
-        />
-      </Fragment>
-    );
-  }
-}
+  const ExercisesByMuscles = getExercisesByMuscles();
+
+  return (
+    <Fragment>
+      <Header muscles={muscles} onExerciseCreated={handleExerciseCreated} />
+      <Exercises
+        exercises={ExercisesByMuscles}
+        category={category}
+        onSelect={handleExerciseSelected}
+        exercise={exercise}
+      />
+      <Footer
+        category={category}
+        muscles={muscles}
+        onSelect={handleCategorySelected}
+      />
+    </Fragment>
+  );
+};
