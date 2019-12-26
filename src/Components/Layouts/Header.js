@@ -1,6 +1,5 @@
 import React from "react";
-import Typography from "@material-ui/core/Typography";
-import { AppBar, Toolbar } from "@material-ui/core";
+import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import CreateDialog from "../Exercises/Dialogs/Create";
 import SignInUser from "../Dialogs/SignIn";
 export default ({ muscles, onExerciseCreated }) => (
@@ -10,7 +9,6 @@ export default ({ muscles, onExerciseCreated }) => (
         exercises database
       </Typography>
       <CreateDialog muscles={muscles} onCreate={onExerciseCreated} />
-      <SignInUser />
     </Toolbar>
   </AppBar>
 );

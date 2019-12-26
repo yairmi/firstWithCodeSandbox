@@ -1,10 +1,7 @@
 import React from "react";
-import { Tabs } from "@material-ui/core/Tabs";
-import { Paper } from "@material-ui/core/Paper";
-import { Tab } from "@material-ui/core/Tab";
+import { Tabs, Tab, Paper } from "@material-ui/core";
 
-export default ({ muscles, 
-  category, onSelect }) => {
+export default ({ muscles, category, onSelect }) => {
   //Since value expect an index we need to find the index of the current selected
   //category in muscles
   const index = category

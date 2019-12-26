@@ -1,7 +1,5 @@
 import React, { Fragment, useState } from "react";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import { Dialog, Select } from "@material-ui/core";
+import { Dialog, Select, Button, TextField } from "@material-ui/core";
 import {
   DialogActions,
   DialogContent,

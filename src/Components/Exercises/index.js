@@ -6,7 +6,7 @@ import {
   ListItem,
   ListItemText,
   ListItemSecondaryAction
-} from "@material-ui/core/List";
+} from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import { Delete } from "@material-ui/icons";
 const styles = {
