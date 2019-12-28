@@ -29,7 +29,6 @@ export default ({ muscles, onExerciseCreated }) => {
 
   const handleToggle = () => {
     setOpen(!open);
-    console.log("Open=", open);
   };
 
   /*handleChange = name => event => {
