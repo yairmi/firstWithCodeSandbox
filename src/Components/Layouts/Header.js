@@ -1,7 +1,6 @@
 import React from "react";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import CreateDialog from "../Exercises/Dialogs/Create";
-import SignInUser from "../Dialogs/SignIn";
 export default ({ muscles, onExerciseCreated }) => (
   <AppBar position="static">
     <Toolbar>

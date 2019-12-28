@@ -1,16 +1,17 @@
 import React, { Fragment, useState } from "react";
-import { Dialog, Select, Button, TextField } from "@material-ui/core";
-import {
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle
-} from "@material-ui/core";
+import { Select } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
-import { FormControl } from "@material-ui/core/FormControl";
-import { InputLabel } from "@material-ui/core/Input";
-import { MenuItem } from "@material-ui/core/Menu";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/Input";
+import MenuItem from "@material-ui/core/Menu";
 import { makeStyles } from "@material-ui/core/styles";
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 const useStyles = makeStyles(theme => ({
   FormControl: { width: 500 }
@@ -21,13 +22,14 @@ export default ({ muscles, onExerciseCreated }) => {
   const [exercise, setExercise] = useState({
     title: "",
     description: "",
-    muscles: ""
+    muscle: ""
   });
 
   const classes = useStyles();
 
   const handleToggle = () => {
     setOpen(!open);
+    console.log("Open=", open);
   };
 
   /*handleChange = name => event => {
@@ -74,17 +76,17 @@ export default ({ muscles, onExerciseCreated }) => {
         <DialogContent>
           <DialogContentText>Please fill the form below.</DialogContentText>
           <form>
-            <TextField
+          <TextField
               label="Title"
               value={exercise.title}
               onChange={handleChange("title")}
               margin="normal"
               className={classes.FormControl}
             />
-            <br />
+            <br/>
             <FormControl className={classes.FormControl}>
-              <InputLabel id="muscles">Muscles</InputLabel>
-              <Select value={muscles} onChange={handleChange("muscles")}>
+            <InputLabel htmlFor="muscles">Muscles</InputLabel>
+              <Select value={exercise.muscle} onChange={handleChange("muscles")}>
                 {muscles.map(muscle => (
                   <MenuItem key={muscle} value={muscle}>
                     {muscle}
