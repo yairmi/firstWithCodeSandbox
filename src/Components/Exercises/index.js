@@ -8,7 +8,7 @@ import {
   ListItemSecondaryAction
 } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
-import { Delete } from "@material-ui/icons";
+import { Delete, Edit } from "@material-ui/icons";
 const styles = {
   Paper: {
     padding: 20,
@@ -47,6 +47,9 @@ export default ({
                     <ListItem key={id} button onClick={() => onSelect(id)}>
                       <ListItemText primary={title} />
                       <ListItemSecondaryAction>
+                      <IconButton>
+                          <Edit />
+                        </IconButton>                        
                         <IconButton>
                           <Delete />
                         </IconButton>

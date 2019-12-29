@@ -22,7 +22,7 @@ export default () => {
   };
   //category is the current selected category
   const handleCategorySelected = category => {
-    setCategory( category );
+    setCategory(category);
   };
 
   const handleExerciseSelected = id => {
