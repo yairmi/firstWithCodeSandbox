@@ -2,8 +2,8 @@ import React, { Fragment, useState } from "react";
 import { Select } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
 import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/Input";
-import MenuItem from "@material-ui/core/Menu";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -14,7 +14,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 const useStyles = makeStyles(theme => ({
-  FormControl: { width: 500 }
+  FormControl: { width: 300 }
 }));
 
 export default ({ muscles, onExerciseCreated }) => {
@@ -22,7 +22,7 @@ export default ({ muscles, onExerciseCreated }) => {
   const [exercise, setExercise] = useState({
     title: "",
     description: "",
-    muscle: ""
+    muscles: ""
   });
 
   const classes = useStyles();
@@ -37,6 +37,8 @@ export default ({ muscles, onExerciseCreated }) => {
   const handleChange = name => ({ target: { value } }) => {
     //this.setState({ exercise: { ...this.state.exercise, [name]: value } });
     setExercise({ exercise: { ...exercise, [name]: value } });
+    console.log("name = ", name);
+    console.log("value = ", value);
   };
 
   const onSubmit = () => {
@@ -84,14 +86,14 @@ export default ({ muscles, onExerciseCreated }) => {
             />
             <br/>
             <FormControl className={classes.FormControl}>
-            <InputLabel htmlFor="muscles">Muscles</InputLabel>
-              <Select value={exercise.muscle} onChange={handleChange("muscles")}>
-                {muscles.map(muscle => (
-                  <MenuItem key={muscle} value={muscle}>
-                    {muscle}
-                  </MenuItem>
-                ))}
-              </Select>
+            <InputLabel id="Muscles-label">Muscles</InputLabel>
+            <Select labelId="Muscles-label" id="Muscles_select" value={exercise.muscle} onChange={handleChange("muscles")}>
+              {muscles.map(muscle => (
+                <MenuItem key={muscle} value={muscle}>
+                  {muscle}
+                </MenuItem>
+              ))}
+            </Select>
             </FormControl>
             <br />
             <TextField
